@@ -6,9 +6,9 @@ const fs = require("fs");
 const { promisify } = require("util");
 const unlinkAsync = promisify(fs.unlink);
 const app = express();
-var cors = require('cors')
+var cors = require("cors");
 
-app.use(cors())
+app.use(cors());
 
 app.listen(process.env.PORT || 3200, () => {
   console.log("Server Connceted");
@@ -23,6 +23,9 @@ cloudinary.config({
 });
 
 const upload = multer({ dest: "uploads/" });
+app.get("/", (req, res) => {
+  res.send("server is running");
+});
 app.post("/addImages", upload.array("photo"), async (req, res) => {
   let images = {};
   for (let i = 0; i < req.files.length; i++) {
